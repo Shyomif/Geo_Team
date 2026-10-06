@@ -1,237 +1,679 @@
-*{
-  margin: 0; 
-  padding: 0;
-  box-sizing:border-box; 
-  font-family: monospace;  
-  flex-wrap: wrap;  
+/* GEO TEAM — space / geospatial theme
+   Palette (kept from original): navy #1B325E, blue #7c94ca, aqua aquamarine, cream #f3f0e4, black */
+
+:root {
+  --navy: #1b325e;
+  --deep: #0b1630;
+  --blue: #7c94ca;
+  --aqua: aquamarine;
+  --cream: #f3f0e4;
+  --muted: #cbd5e1;
+  --card: rgba(27, 50, 94, 0.55);
+  --line: rgba(124, 148, 202, 0.35);
+  --radius: 18px;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+html {
+  scroll-behavior: smooth;
+  font-size: 17px;
+}
 
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  line-height: 1.65;
+  color: var(--cream);
+  background:
+    radial-gradient(ellipse at 20% -10%, var(--navy) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 110%, #14284f 0%, transparent 50%),
+    var(--deep);
+  background-attachment: fixed;
+  position: relative;
+}
+
+/* ---------- Starfield (sparkling stars) ---------- */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-repeat: repeat;
+}
+
+body::before {
+  background-image:
+    radial-gradient(1px 1px at 30px 40px, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 120px 90px, #fff, transparent),
+    radial-gradient(1px 1px at 210px 20px, #fff, transparent),
+    radial-gradient(1px 1px at 280px 150px, #cfe3ff, transparent),
+    radial-gradient(1.5px 1.5px at 60px 190px, #fff, transparent),
+    radial-gradient(1px 1px at 330px 60px, #fff, transparent),
+    radial-gradient(1px 1px at 170px 240px, #fff, transparent);
+  background-size: 360px 280px;
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+
+body::after {
+  background-image:
+    radial-gradient(2px 2px at 90px 130px, var(--aqua), transparent),
+    radial-gradient(1.5px 1.5px at 250px 40px, #fff, transparent),
+    radial-gradient(2px 2px at 400px 210px, var(--blue), transparent),
+    radial-gradient(1px 1px at 520px 90px, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 180px 300px, #fff, transparent);
+  background-size: 560px 340px;
+  animation: twinkle 2.6s ease-in-out 0.8s infinite alternate-reverse;
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+header,
+main,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Header ---------- */
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1B325E;
-  padding: 15px 15px; 
-  position: relative;
-  overflow: hidden; 
   flex-wrap: wrap;
-}
-
-.site-header::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  
-  background-image: 
-    radial-gradient(0.7px 0.7px at 30px 15px, #ffffff, rgba(0,0,0,0)),
-    radial-gradient(1px 1px at 90px 35px, #ffffff, rgba(0,0,0,0)),
-    radial-gradient(1px 1px at 150px 10px, #ffffff, rgba(0,0,0,0)),
-    radial-gradient(0.5px 0.5px at 220px 40px, #ffffff, rgba(0,0,0,0)),
-    radial-gradient(1.2px 1.2px at 290px 20px, #ffffff, rgba(0,0,0,0)),  
-    radial-gradient(0.9px 0.9px at 320px 50px, #ffffff, rgba(0,0,0,0)),
-    radial-gradient(1px 1px at 350px 70px, #ffffff, rgba(0,0,0,0)),
-    radial-gradient(1.2px 1.2px at 290px 20px, #ffffff, rgba(0,0,0,0)),  
-    radial-gradient(0.9px 0.9px at 320px 50px, #ffffff, rgba(0,0,0,0)), 
-    radial-gradient(0.7px 0.7px at 30px 15px, #ffffff, rgba(0,0,0,0)),  
-    radial-gradient(1.2px 1.2px at 290px 20px, #ffffff, rgba(0,0,0,0)),  
-    radial-gradient(0.9px 0.9px at 320px 50px, #ffffff, rgba(0,0,0,0)), 
-    radial-gradient(0.7px 0.7px at 30px 15px, #ffffff, rgba(0,0,0,0)),
-    radial-gradient(1px 1px at 90px 35px, #ffffff, rgba(0,0,0,0)),
-    radial-gradient(1px 1px at 150px 10px, #ffffff, rgba(0,0,0,0)),
-    radial-gradient(0.5px 0.5px at 220px 40px, #ffffff, rgba(0,0,0,0)),
-    radial-gradient(1px 1px at 350px 70px, #ffffff, rgba(0,0,0,0));
-  background-repeat: repeat;
-  background-size: 400px 80px;
-  
-  animation: headerTwinkle 3s infinite alternate;
-  pointer-events: none; 
-} 
-
-.site-header > * {
-  position: relative;
-  z-index: 2; 
-}
-
-
-@keyframes headerTwinkle {
-  0% {
-    opacity: 0.001;
-  }
-  100% {
-    opacity: 75;
-  }
+  gap: 12px;
+  padding: 12px clamp(16px, 5vw, 64px);
+  background: rgba(11, 22, 48, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
 }
 
 .brand-logo {
   display: flex;
   align-items: center;
   gap: 12px;
-  text-decoration: none; 
-  flex-wrap: wrap;
-} 
-
+  text-decoration: none;
+}
 
 #logo {
-  width: 100px;
-  height: 100px; 
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
 
-} 
+/* ---------- Logo orbit (satellite) ---------- */
+.logo-orbit {
+  position: relative;
+  perspective: 300px;
+  display: inline-flex;
+  margin: 12px;
+}
 
+.orbit {
+  position: absolute;
+  inset: -14px;
+  z-index: 2;
+  border: 1px dashed rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: orbit-tilt 7s linear infinite;
+}
+
+/* orbit plane tilted 60 degrees, satellite travels along the tilted ring */
+@keyframes orbit-tilt {
+  from {
+    transform: rotate3d(1, -0.4, 0, 60deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotate3d(1, -0.4, 0, 60deg) rotateZ(360deg);
+  }
+}
+
+.satellite {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--aqua);
+  animation: spin-slow 7s linear infinite reverse; /* keeps it upright while orbiting */
+}
+
+.satellite::before,
+.satellite::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  width: 7px;
+  height: 4px;
+  background: var(--aqua);
+  border-radius: 1px;
+}
+
+.satellite::before {
+  right: 100%;
+  margin-right: 1px;
+}
+.satellite::after {
+  left: 100%;
+  margin-left: 1px;
+}
 
 .team-title {
-  color: #ffffff;
-  font-size: 40px;
-  margin: 0;
-  text-decoration: none;  
-  margin-left: 20px ;  
-  flex-wrap: wrap;
-} 
-
-
+  color: #fff;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
 
 .nav_menu ul {
   display: flex;
-  list-style: none; 
-  padding: 0;
-  gap: 10px;
+  flex-wrap: wrap;
+  list-style: none;
+  gap: 4px;
 }
 
 .nav-item {
-  color: #cbd5e1;
+  display: block;
+  color: var(--muted);
   text-decoration: none;
+  font-size: 0.95rem;
   padding: 8px 16px;
-  border-radius: 6px;
-  transition: all 0.3s ease;  
-  text-shadow: 0 0 15  px rgba(56, 189, 248, 0.6); 
-  flex-wrap: wrap; 
-
+  border-radius: 999px;
+  transition:
+    color 0.2s,
+    background-color 0.2s;
 }
 
-.nav-item:hover,  
+.nav-item:hover {
+  color: #fff;
+  background: rgba(124, 148, 202, 0.25);
+}
+
 .nav-item.active {
-   color: #ffffff;
-  transform: translateY(-4px) translateX(-2px);
-  box-shadow: 2px 5px 0 0 black;
-  background-color:  #7c94ca; 
-  
-}   
-
-
-.card_1{
-  margin: 200px auto;
-  box-sizing: 1000px;
-  background-color: #7c94ca;
-  padding: 20px;
-  flex-wrap: wrap;
+  color: var(--deep);
+  background: var(--blue);
+  font-weight: 600;
 }
 
-#int {
-  box-sizing: 600px;
-  margin: 70px 80px 80px; 
-  line-height: 1.5;
-  flex-wrap: wrap;
-  
-} 
-
-#int h2{
-  text-align: center; 
-  
-} 
-#int p{
-  text-align: justify; 
-  
+/* ---------- Language toggle & RTL ---------- */
+.lang-toggle {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  color: var(--aqua);
+  background: transparent;
+  border: 1px solid var(--aqua);
 }
 
-#int a {
-  box-sizing: 55px;
-  background-color: aquamarine;
-  border: 2px solid black;
-  border-radius: 10px;
-  padding: 5px;
-  text-decoration: none;
-  position: relative; 
-  top:40px; 
-}  
-.int_1{ 
- list-style: none; 
- /* border: black 2px solid;   */
- margin-inline:auto;  
- min-width:150px;
- min-height:100px; 
- display: flex ;
- justify-content: space-evenly;
- gap:1rem ; 
- flex-flow:row wrap;  
- padding: 50px;
+.lang-toggle:hover {
+  background: rgba(127, 255, 212, 0.12);
+  box-shadow: none;
 }
-.box{ 
-  max-width:250px;
-  min-height:200px;
-  background-color: black; 
-  color:whitesmoke; 
-  padding: 20px; 
-  align-items: center; 
-  flex-shrink: 1; 
-  flex-basis: 250px;
-} 
-#h2{
-  margin:20px 80px 80px;
+
+html[lang="ar"] body {
+  font-family: "Cairo", "Inter", system-ui, sans-serif;
+  line-height: 1.8;
 }
-footer{
-  background-color: black; 
-  min-width: 450px; 
-  max-height: 400px; 
-  color: whitesmoke ; 
-  
-   
-} 
-.menu_footer{ 
-  display: flex;
-  list-style: none; 
-  /* flex-direction: column; */ 
-  
-} 
-.item_footer{ 
-  text-decoration: none; 
-  color: whitesmoke ;  
-  align-items: center ;
+
+html[lang="ar"] h2,
+html[lang="ar"] .team-title {
+  letter-spacing: 0;
+}
+
+/* ---------- Layout ---------- */
+main {
+  flex: 1;
+  width: min(1120px, 100% - 32px);
+  margin: 0 auto;
+  padding: clamp(40px, 8vw, 96px) 0;
+}
+
+main > section {
+  margin-bottom: 56px;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--aqua);
+  margin-bottom: 8px;
+}
+
+p {
+  color: var(--muted);
+  max-width: 68ch;
+  margin-bottom: 14px;
+}
+
+/* ---------- Hero (home) ---------- */
+.hero {
   text-align: center;
+  padding: clamp(32px, 8vw, 88px) 0 clamp(40px, 6vw, 72px);
 }
 
-html{
-  background-color: #f3f0e4;;
-  font-size: 22px;  
+.hero h2 {
+  font-size: clamp(2.2rem, 6.5vw, 4.4rem);
+  max-width: 18ch;
+  margin: 0 auto 24px;
+  background: linear-gradient(120deg, #fff 30%, var(--blue) 70%, var(--aqua));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
- 
 
+.hero p {
+  margin: 0 auto 32px;
+  font-size: 1.1rem;
+}
 
+.btn,
+.hero a,
+button {
+  display: inline-block;
+  font: inherit;
+  font-weight: 600;
+  color: var(--deep);
+  background: var(--aqua);
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 28px;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
 
+.btn:hover,
+.hero a:hover,
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(127, 255, 212, 0.3);
+}
 
+button[type="reset"] {
+  background: transparent;
+  color: var(--cream);
+  border: 1px solid var(--line);
+  margin-inline-start: 8px;
+}
 
+/* ---------- Cards ---------- */
+.int_1,
+.grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
 
+.box,
+.grid > section,
+main > section.panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px;
+  transition:
+    transform 0.25s,
+    border-color 0.25s,
+    box-shadow 0.25s;
+}
 
+.box:hover,
+.grid > section:hover {
+  transform: translateY(-4px);
+  border-color: var(--aqua);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+}
 
+.box p {
+  font-size: 0.95rem;
+  margin: 0;
+}
 
+.areas-title {
+  text-align: center;
+  margin-bottom: 36px;
+}
 
-/* @media (max-width : 575.98px) {
-for mobile   
-} */ 
+/* Services page: intro spans full width, remaining sections are cards */
+.grid > section:first-child {
+  grid-column: 1 / -1;
+  background: none;
+  border: 0;
+  padding: 0;
+}
 
+.grid > section:first-child:hover {
+  transform: none;
+  box-shadow: none;
+}
 
-/* @media(min-width: 768px)and(max-width: 991.98px) {
- for tablet  
-} */
+/* Lists */
+main ul:not(.int_1) {
+  list-style: none;
+  margin-top: 12px;
+}
 
-/* @media (min-width: 992px)and(max-width: 1199.98px){
-  for desktop
-} */
+main ul:not(.int_1) li {
+  position: relative;
+  padding: 3px 0;
+  padding-inline-start: 22px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
 
+main ul:not(.int_1) li::before {
+  content: "✦";
+  position: absolute;
+  inset-inline-start: 0;
+  color: var(--blue);
+  font-size: 0.75rem;
+  top: 7px;
+}
 
-/* @media(min-width: 1200px){
-for extra large devices
-} */ 
+/* ---------- Contact form ---------- */
+fieldset {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(20px, 4vw, 40px);
+  max-width: 640px;
+}
+
+legend {
+  color: var(--aqua);
+  padding: 0 8px;
+}
+
+form p {
+  max-width: none;
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+
+input,
+textarea {
+  width: 100%;
+  font: inherit;
+  color: var(--cream);
+  background: rgba(11, 22, 48, 0.6);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--aqua);
+  box-shadow: 0 0 0 3px rgba(127, 255, 212, 0.18);
+}
+
+textarea {
+  resize: vertical;
+  margin-bottom: 20px;
+}
+
+dd {
+  color: var(--muted);
+  margin-inline-start: 0;
+  margin-bottom: 6px;
+}
+
+/* ---------- Animations ---------- */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(127, 255, 212, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(127, 255, 212, 0);
+  }
+}
+
+@keyframes shoot {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(-35deg);
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-480px, 340px) rotate(-35deg);
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+body {
+  animation: rise 0.7s ease both;
+}
+
+.hero h2 {
+  animation: rise 0.9s 0.1s ease both;
+}
+.hero p {
+  animation: rise 0.9s 0.25s ease both;
+}
+.hero a {
+  animation:
+    rise 0.9s 0.4s ease both,
+    glow 2.6s 1.5s ease-in-out infinite;
+}
+
+.hero-art {
+  display: block;
+  width: min(100%, 1000px);
+  height: auto;
+  margin: clamp(32px, 6vw, 64px) auto 0;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+  animation: floaty 7s ease-in-out infinite;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease var(--d, 0ms),
+    transform 0.7s ease var(--d, 0ms);
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* cards: keep the hover lift working after the reveal finishes */
+.box.reveal.in:hover,
+.grid > section.reveal.in:hover {
+  transform: translateY(-4px);
+  transition-delay: 0ms;
+}
+
+#logo {
+  transition: transform 0.6s ease;
+}
+.brand-logo:hover #logo {
+  transform: rotate(20deg) scale(1.08);
+}
+
+.shooting-star {
+  position: fixed;
+  top: var(--top, 10vh);
+  left: var(--left, 80vw);
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, #fff, transparent);
+  border-radius: 2px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.shooting-star.go {
+  animation: shoot 1.4s ease-out;
+}
+
+html[dir="rtl"] .shooting-star {
+  background: linear-gradient(270deg, #fff, transparent);
+}
+
+/* ---------- Footer ---------- */
+footer {
+  text-align: center;
+  padding: 40px 16px 32px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  background: rgba(11, 22, 48, 0.8);
+  border-top: 1px solid var(--line);
+}
+
+footer img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  margin: 20px 0 8px;
+}
+
+footer p {
+  margin: 0 auto 6px;
+}
+
+footer a {
+  color: var(--aqua);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+.menu_footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 24px;
+  list-style: none;
+}
+
+.item_footer {
+  color: var(--cream);
+  text-decoration: none;
+}
+
+.item_footer:hover {
+  color: var(--aqua);
+}
+
+hr {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .site-header {
+    justify-content: center;
+  }
+  .nav_menu ul {
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after {
+    animation: none;
+    opacity: 0.7;
+  }
+  *,
+  .hero-art,
+  .hero a {
+    animation: none !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .shooting-star {
+    display: none;
+  }
+  * {
+    transition: none !important;
+  }
+}
