@@ -11,6 +11,8 @@
   --card: rgba(27, 50, 94, 0.55);
   --line: rgba(124, 148, 202, 0.35);
   --radius: 18px;
+  --logo-green: #6aa84f; /* globe / TEAM text in the logo */
+  --logo-brown: #b0702f; /* mountain in the logo */
 }
 
 * {
@@ -138,7 +140,7 @@ footer {
   position: absolute;
   inset: -14px;
   z-index: 2;
-  border: 1px dashed rgba(255, 255, 255, 0.55);
+  border: 1px dashed var(--logo-green);
   border-radius: 50%;
   pointer-events: none;
   animation: orbit-tilt 7s linear infinite;
@@ -163,7 +165,7 @@ footer {
   margin: -4px 0 0 -4px;
   background: #fff;
   border-radius: 2px;
-  box-shadow: 0 0 8px var(--aqua);
+  box-shadow: 0 0 8px var(--logo-green);
   animation: spin-slow 7s linear infinite reverse; /* keeps it upright while orbiting */
 }
 
@@ -174,7 +176,7 @@ footer {
   top: 2px;
   width: 7px;
   height: 4px;
-  background: var(--aqua);
+  background: var(--logo-brown);
   border-radius: 1px;
 }
 
